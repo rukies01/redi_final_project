@@ -16,8 +16,8 @@ Wardrope = {'Coporate': ['Navy blue trouser suit','Black skirt suit', 'Navyblue 
              'Native':['Ankara Jumpsuit', 'Ankara Baggy Pant and Top','Brocade Bubu Gown' ],
 
             }
-Laundry = []
-Favorites = []
+Laundry = []   # make this a text file.
+Favorites = []  # make this a text file.
 
 def main():
     while True:
@@ -33,7 +33,7 @@ def main():
         user_choice = input()
         if user_choice == '1':
             item = selection()
-            if item:
+            #if item:
         
 def choice(answer):
     my_choice = input('Would you like me to add this to your Favorites ? (yes/no): ')
@@ -47,22 +47,23 @@ def choice(answer):
 def selection2(select):
    if select == 'Coporate':
         answer = random.choice(Wardrope['Coporate'])  #returns a random choice from coporate
-        print(answer)
+        return(answer)
    elif select == 'Casual':
         answer = random.choice(Wardrope['Casual']) # #returns a random choice from casual
-        print(answer)
+        return(answer)
    elif select == 'Sport':
         answer = random.choice(Wardrope['Sport']) # #returns a random choice from sport
-        print(answer)
+        return(answer)
    elif select == 'Native':
         answer = random.choice(Wardrope['Native']) # #returns a random choice from native
-        print(answer)
+        return(answer)
    else:
        try:
             if select not in ['Coporate','Casual','Sport','Native']:
                 raise ValueError ('That is not a valid Entry')
        except ValueError as error:
            print(error)
+     
 
 
 def selection():
@@ -71,6 +72,8 @@ def selection():
      print (key)
     select = input('What kind of outfit would you like today : ')  # print available options
     answer = selection2(select)
+    add_cloth_to_laundry(answer)
+    print(f'{Laundry}')
     choice(answer)
 
 
@@ -80,10 +83,8 @@ def view_favorites():
 
 
 def add_cloth_to_laundry(answer):
-    while True:
-        Laundry.append(answer)
-    else:
-        break
+    Laundry.append(answer)
+    
         
 
 
@@ -91,9 +92,18 @@ def empty_laundry():
     Laundry.clear()  # this empty/clear the laundry list
 
 
+def add_to_wardrope(): # this function alows user to add clothes to the Wardrope
+   Add_to_Wardrope1 = input('Please choose a category:(Native, Corporate, Casual, Sport) ')
+   Add_to_Wardrope2 = input('Please provide the cloth type: ')
+    
+   
+   A = Wardrope.get(Add_to_Wardrope1)  # converts the value in selected key into a list
+   A.append(Add_to_Wardrope2)  # adds the user input into the list
+   Wardrope.update({Add_to_Wardrope1:A})  # converts list back to dictionary and append.
+   print('{A} has been added to Wardrope')
 
 
+             
 
 selection()
-
-                   
+view_favorites()
