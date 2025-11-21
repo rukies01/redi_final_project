@@ -3,7 +3,7 @@
 # welcome message
 #What will you like to wear
 #options Coporate, casual, sport, dinner
-#favorites, to include clothes mark as favorites
+#favorites, to include clothes marked as favorites and saved in a file
 #ask if cloth is accepted or not
 #ck laundry
 #add clothes to list
@@ -20,11 +20,17 @@ Laundry = []   # make this a text file.
 Favorites = []  # make this a text file.
 
 
+
+def add_cloth_to_Favorites():
+    with open('Favorites.txt','w') as file:
+        for item in Favorites:
+            file.write(item + "\n")
         
 def choice(answer):  # This function ask user if the random provided outfit should be added to the list of Favorites
     my_choice = input('Would you like me to add this to your Favorites ? (yes/no): ').strip().lower()
     if my_choice == 'yes':
           Favorites.append(answer)  # add 'answer' to favorites list
+          add_cloth_to_Favorites()
           print('Item added to your Favorites!') #prints Item has been added to list to inform user
     else:
           print('Item not added to Favorites!')  # print this if my_choice is no
@@ -65,21 +71,30 @@ def selection():
 
     
 def view_favorites():
-     print(f'Your Favorites : {Favorites}')  # this shows a list of clothes added to favorites
+     with open("Favorites.txt", "r") as file:
+       favorites = file.read()
+       print(f'Your Favorites : {favorites}')  # this shows a list of clothes added to favorites
 
 
 def add_cloth_to_laundry(answer): # this function add the randomly selected outfit to laundry and assumming the user wore that cloth
-    Laundry.append(answer)
+    Laundry.append(answer)  # this add ans to Laundry
+    with open('Laundry.txt','w') as file: #opens the file Laundry.txt if not exixting
+        for item in Laundry:
+            file.write(item + "\n")  # add item to file Laundry.txt
 
 
 def view_laundry():
-    print(f'Your Laundry:{Laundry}')
+    with open("Laundry.txt", "r") as file: # this opens the file Laundry.txt if not exixting
+       laundry = file.read()  # this reads the items in file Laundry.txt
+    print(f'Your Laundry:{laundry}') #prints item in file
     
         
 
 
 def empty_laundry():
     Laundry.clear()  # this empty/clear the laundry list
+    with open("Laundry.txt", "w") as file:
+        file.write("")  # this ovewrites the Laundry file with noting, automatically deleting file contents
     print('Hurray!!!, Laundry emptied successfully!')
 
 
