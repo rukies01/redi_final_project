@@ -63,8 +63,10 @@ WardrobeOrganizer/
    - ask user if they want to save favorites  
    - adding items to Laundry 
        
-
 The program continue to  run until the user selects the Exit option.
+
+This is a link to the Wardrobe organizer diagram
+![Diagram of code](https://github.com/rukies01/redi_final_project/blob/main/Redi%20project%20Diagramm.1.png)
 
 
 # PURPOSE & IMPACT SECTION 
