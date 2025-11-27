@@ -1,23 +1,35 @@
-
+#   A simple, wardrobe management app with menu which helps users to pick outfits, 
+    #organize clothing into categories, save clothes to favorites, and manage laundry."""
 #Project features
 # welcome message
-#What will you like to wear
-#options Coporate, casual, sport, dinner
-#favorites, to include clothes marked as favorites and saved in a file
-#ask if cloth is accepted or not
-#ck laundry
-#add clothes to list
+# What will you like to wear
+# options Coporate, casual, sport, native
+# favorites, to include clothes marked as favorites and saved in a file
+# ck laundry
+# add clothes to laundry list
 
+
+
+import json
 import random
 
-Wardrope = {'Corporate': ['Navy blue trouser suit','Black skirt suit', 'Navyblue Skirt suit', 'Navyblue Skirt Suit', 'Cream Skirt Suit', 'Cream Trouser Suit'],
+Wardrobe = {'Corporate': ['Navy blue trouser suit','Black skirt suit', 'Navyblue Skirt suit', 'Navyblue trouser Suit', 'Cream Skirt Suit', 'Cream Trouser Suit'],
             'Casual':['Blue jeans and White top', 'Blue jean and Cream Top', 'Blue jeans and Black top','Black jeans and yellow top','Black jeans and Brown top'],
-             'Sport':['Black sport wear', 'Navy Blue sport wear', 'Track suit'],
+             'Sport':['Black sport wear', 'Navy Blue sport wear', 'Addidas Track suit', 'Black track suit'],
              'Native':['Ankara Jumpsuit', 'Ankara Baggy Pant and Top','Brocade Bubu Gown' ],
 
             }
-Laundry = []   # make this a text file.
-Favorites = []  # make this a text file.
+
+with open("wardrobe.json", "w") as file:  # this writes Wardrobe to json file and indent it for proper reading.
+    json.dump(Wardrobe, file, indent=4)
+
+
+with open("wardrobe.json", "r") as file:  # this convert the the content of the json into dictinary for usage
+        Wardrobe = json.load(file)
+       
+
+Laundry = []   
+Favorites = []  
 
 
 
@@ -38,35 +50,45 @@ def choice(answer):  # This function ask user if the random provided outfit shou
 
 def selection2(select):  #This function returns a random selection according to user input
    if select == 'Corporate':
-        answer = random.choice(Wardrope['Corporate'])  #returns a random choice from coporate
+        answer = random.choice(Wardrobe[select])  #returns a random choice from coporate
         return(answer)
+        
    elif select == 'Casual':
-        answer = random.choice(Wardrope['Casual']) # #returns a random choice from casual
+        answer = random.choice(Wardrobe['Casual']) # #returns a random choice from casual
         return(answer)
+        
    elif select == 'Sport':
-        answer = random.choice(Wardrope['Sport']) # #returns a random choice from sport
+        answer = random.choice(Wardrobe['Sport']) # #returns a random choice from sport
         return(answer)
+   
    elif select == 'Native':
-        answer = random.choice(Wardrope['Native']) # #returns a random choice from native
+        answer = random.choice(Wardrobe['Native']) # #returns a random choice from native
         return(answer)
+   
    else:
        try:
             if select not in ['Corporate','Casual','Sport','Native']: # This throws an error if user selection is not in List
+                print('This is not a valid Entry')
                 raise ValueError ('This is not a valid Entry')  # prints this to notify user of wrong input
        except ValueError as error:
            print(error)  # prints the error
-     
+           return
 
 
 def selection():
     
-    for key in Wardrope:
+    for key in Wardrobe: # iterates through the wardrobe key
      print (key)
     select = input('What kind of outfit would you like today(Corporate, Casual, Sport, Native)? : ').strip().capitalize()  # print available options
+    if select not in Wardrobe:
+        print("This is not a valid category! Returning to menu.")
+        return
     answer = selection2(select)
-    add_cloth_to_laundry(answer)
-    print(f'{Laundry}')
-    choice(answer)
+    select = select.strip().capitalize()
+    if answer is not None:  # this ensures that an invalid input does not call the function to add clothes to Laundry
+        add_cloth_to_laundry(answer)
+        print(f'{Laundry}')
+        choice(answer)
 
 
     
@@ -98,55 +120,60 @@ def empty_laundry():
     print('Hurray!!!, Laundry emptied successfully!')
 
 
-def add_to_wardrope(): # this function alows user to add clothes to the Wardrope
-   Add_to_Wardrope1 = input('Please choose a category:(Native, Corporate, Casual, Sport) ').strip().capitalize()
-   Add_to_Wardrope2 = input('Please provide the cloth type: ').strip().title()
+def add_to_wardrobe(): # this function alows user to add clothes to the Wardrope
+   Add_to_Wardrobe1 = input('Please choose a category:(Native, Corporate, Casual, Sport) ').strip().capitalize()
+   Add_to_Wardrobe2 = input('Please provide the cloth type: ').strip().title()
     
    
-   A = Wardrope.get(Add_to_Wardrope1)  # converts the value in selected key into a list
-   A.append(Add_to_Wardrope2)  # adds the user input into the list
-   Wardrope.update({Add_to_Wardrope1:A})  # converts list back to dictionary and append.
-   print(f'{Add_to_Wardrope2} has been added to Wardrope')
+   A = Wardrobe.get(Add_to_Wardrobe1)  # converts the value in selected key into a list
+   A.append(Add_to_Wardrobe2)  # adds the user input into the list
+   Wardrobe.update({Add_to_Wardrobe1:A})  # converts list back to dictionary and append.
+   print(f'{Add_to_Wardrobe2} has been added to Wardrope')
    print(f'{A}')
+   with open("wardrobe.json", "w") as file:
+        json.dump(Wardrobe, file, indent=4)
 
 
 
 
 def main():
     while True:
-        print('Welcome to your Wardrop')
-        print('What will you like to do ?')
+        print('Welcome to your Magical Wardrobe')
+        print('What would you like to do ?')
         print('1. Select a Cloth')
         print('2. view Favorites')
         print('3. View Laundry') 
         print('4. Empty my Laundry')
         print('5. Add cloth to wardrope')
-        print('6.Exit')
+        print('6. Exit')
 
         user_choice = input('Please select options(1-6):').strip()
-        if user_choice == '1':
-            selection()
-        elif user_choice == '2':
-          view_favorites()
-          
-        elif user_choice == '3':
-            view_laundry()
+        match user_choice:
+            case'1':
+                selection()
+            case '2':
+                view_favorites()
+            case '3':
+                view_laundry()
+            case'4':
+                empty_laundry()
+            case'5':
+                add_to_wardrobe()   
+            case'6':
+                print("Goodbye!")
+                break 
             
-        elif user_choice == '4':
-            empty_laundry()
-            
-        elif user_choice == '5':
-            add_to_wardrope()   # ck use case
-            
-        elif user_choice == '6':
-            print("Goodbye!")
-            break 
-        else:
-            print("Invalid choice, please enter a number from 1 to 6.")
+            case _:
+                print("Invalid choice, please enter a number from 1 to 6.")
+
+
+
+
 
 
 
 main()
+
 
 
              

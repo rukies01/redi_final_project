@@ -1,0 +1,28 @@
+{
+    "Corporate": [
+        "Navy blue trouser suit",
+        "Black skirt suit",
+        "Navyblue Skirt suit",
+        "Navyblue trouser Suit",
+        "Cream Skirt Suit",
+        "Cream Trouser Suit"
+    ],
+    "Casual": [
+        "Blue jeans and White top",
+        "Blue jean and Cream Top",
+        "Blue jeans and Black top",
+        "Black jeans and yellow top",
+        "Black jeans and Brown top"
+    ],
+    "Sport": [
+        "Black sport wear",
+        "Navy Blue sport wear",
+        "Addidas Track suit",
+        "Black track suit"
+    ],
+    "Native": [
+        "Ankara Jumpsuit",
+        "Ankara Baggy Pant and Top",
+        "Brocade Bubu Gown"
+    ]
+}
