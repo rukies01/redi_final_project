@@ -28,7 +28,7 @@ This project was built to practice Python fundamentals, problem-solving, and fil
 ### 5. Clean Menu Interface
 - Easy-to-use looped menu
 - Handles invalid input
-- Uses `.strip()` and `.lower()` for clean formatting
+- Uses `.strip()`, `.capital()` and `.lower()` for clean formatting
 
 ### 6. Exit option and error handling
 - To exit the programme
@@ -40,6 +40,7 @@ This project was built to practice Python fundamentals, problem-solving, and fil
 - Python environment
 - Random module
 - File handling (`open()`, read/write)
+- error handling
 - Lists & dictionaries
 - Loops, conditionals, Switch case, functions
   
@@ -52,6 +53,7 @@ WardrobeOrganizer/
 ├── main.py
 ├── favorites.txt
 ├── laundry.txt 
+├── Wardrobe.json
 └── README.md
 
 ## How It Works
@@ -59,7 +61,7 @@ WardrobeOrganizer/
 1. Run the program  
 2. Choose an option from the menu (1-6) 
 3. The program responds instantly:
-   - selecting a random clothe from the category choosen  
+   - selecting a random cloth from the category choosen  
    - ask user if they want to save favorites  
    - adding items to Laundry 
        
@@ -100,8 +102,8 @@ From a learning perspective, the project strengthens:
 ## Future Improvements
 
 Add a weather API to suggest weather appropriate clothes
-Export wardrobe to CSV or JSON
 Add timestamps to track last worn dates
+Ask user if they are satisfy with suggestion and then suggest another if they are not satisfied.
 Add a GUI 
 
 
