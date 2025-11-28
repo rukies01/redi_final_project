@@ -5,7 +5,8 @@
         "Navyblue Skirt suit",
         "Navyblue trouser Suit",
         "Cream Skirt Suit",
-        "Cream Trouser Suit"
+        "Cream Trouser Suit",
+        "Cream Jumpsuit"
     ],
     "Casual": [
         "Blue jeans and White top",
@@ -23,6 +24,7 @@
     "Native": [
         "Ankara Jumpsuit",
         "Ankara Baggy Pant and Top",
-        "Brocade Bubu Gown"
+        "Brocade Bubu Gown",
+        "Kampala Kimono"
     ]
 }

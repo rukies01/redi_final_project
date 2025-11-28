@@ -20,20 +20,33 @@ Wardrobe = {'Corporate': ['Navy blue trouser suit','Black skirt suit', 'Navyblue
 
             }
 
-with open("wardrobe.json", "w") as file:  # this writes Wardrobe to json file and indent it for proper reading.
-    json.dump(Wardrobe, file, indent=4)
+#with open("wardrobe.json", "w") as file:  # this writes Wardrobe to json file and indent it for proper reading.
+    #json.dump(Wardrobe, file, indent=4) # it was commented out of the code because i need it to run just once.
 
 
 with open("wardrobe.json", "r") as file:  # this convert the the content of the json into dictinary for usage
         Wardrobe = json.load(file)
        
 
-Laundry = []   
-Favorites = []  
+Laundry = []     # this is an empty Laundry list
+try:
+    with open("Laundry.txt", "r") as file:  # this reads the content of the Laundry.txt and remember its content
+        Laundry = [line.strip() for line in file]  
+except FileNotFoundError:   # error handling should in case file was not found
+    Laundry = []              # then programme use this empty list
 
 
 
-def add_cloth_to_Favorites():
+Favorites = []   # this is an empty Favourites list
+try:
+    with open("Favorites.txt", "r") as file:    # this reads the content of the Favourites.txt and remember its content
+        Favorites = [line.strip() for line in file]
+except FileNotFoundError:   # error handling should in case file was not found
+    Favorites = []       # then programme use this empty list
+
+
+
+def add_cloth_to_Favorites():  # this function adds clothes marked as favourites to the Favourites file
     with open('Favorites.txt','w') as file:
         for item in Favorites:
             file.write(item + "\n")
@@ -122,6 +135,9 @@ def empty_laundry():
 
 def add_to_wardrobe(): # this function alows user to add clothes to the Wardrope
    Add_to_Wardrobe1 = input('Please choose a category:(Native, Corporate, Casual, Sport) ').strip().capitalize()
+   if Add_to_Wardrobe1 not in Wardrobe:
+        print(f"{Add_to_Wardrobe1} category does not  exist!")
+        return
    Add_to_Wardrobe2 = input('Please provide the cloth type: ').strip().title()
     
    
@@ -130,22 +146,31 @@ def add_to_wardrobe(): # this function alows user to add clothes to the Wardrope
    Wardrobe.update({Add_to_Wardrobe1:A})  # converts list back to dictionary and append.
    print(f'{Add_to_Wardrobe2} has been added to Wardrope')
    print(f'{A}')
-   with open("wardrobe.json", "w") as file:
+   with open("wardrobe.json", "w") as file:  # saves to json
         json.dump(Wardrobe, file, indent=4)
 
 
 
+def view_wardrobe(wardrobe):  # this function allows us to view content of our Wardrobe
+    for key, items in wardrobe.items():
+        print(f"{key}:")
+        for item in items:
+            print(f"  * {item}")
 
-def main():
+
+
+
+def main():             # this is the menu
     while True:
         print('Welcome to your Magical Wardrobe')
         print('What would you like to do ?')
-        print('1. Select a Cloth')
-        print('2. view Favorites')
-        print('3. View Laundry') 
-        print('4. Empty my Laundry')
-        print('5. Add cloth to wardrope')
-        print('6. Exit')
+        print('1. Select an outfit')
+        print('2. View Favorites')
+        print('3. View Wardrobe')
+        print('4. View Laundry') 
+        print('5. Empty my Laundry')
+        print('6. Add clothes to wardrobe')
+        print('7. Exit')
 
         user_choice = input('Please select options(1-6):').strip()
         match user_choice:
@@ -154,12 +179,14 @@ def main():
             case '2':
                 view_favorites()
             case '3':
+                view_wardrobe(Wardrobe)
+            case '4':
                 view_laundry()
-            case'4':
-                empty_laundry()
             case'5':
-                add_to_wardrobe()   
+                empty_laundry()
             case'6':
+                add_to_wardrobe()   
+            case'7':
                 print("Goodbye!")
                 break 
             
@@ -172,7 +199,7 @@ def main():
 
 
 
-main()
+main()    # calls the programme
 
 
 
