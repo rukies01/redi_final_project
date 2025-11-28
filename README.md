@@ -99,12 +99,12 @@ From a learning perspective, the project strengthens:
 2. Run the script
    python main.py
 
-## Future Improvements
+## Future Improvements:
 
-Add a weather API to suggest weather appropriate clothes
-Add timestamps to track last worn dates
-Ask user if they are satisfy with suggestion and then suggest another if they are not satisfied.
-Add a GUI 
+- Add a weather API to suggest weather appropriate clothes
+- Add timestamps to track last worn dates
+- Ask user if they are satisfy with suggestion and then suggest another if they are not satisfied.
+- Add a GUI 
 
 
 Author:
